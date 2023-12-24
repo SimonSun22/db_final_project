@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media only screen and (max-width: 768px) {
+            .container {
+                max-width: 95%;
+            }
+        }
+
+        h2 {
+            color: #444;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            color: #666;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .form-container {
+            max-width: 600px; /* Adjust this value as needed */
+            margin: 0 auto; /* Centers the form on the page */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-31 {
+          background-color: #222;
+          border-radius: 4px;
+          border-style: none;
+          box-sizing: border-box;
+          color: #fff;
+          cursor: pointer;
+          display: inline-block;
+          font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 1.5;
+          margin: 0;
+          max-width: none;
+          min-height: 44px;
+          min-width: 10px;
+          outline: none;
+          overflow: hidden;
+          padding: 9px 20px 8px;
+          position: relative;
+          text-align: center;
+          text-transform: none;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          width: 100%;
+          margin-bottom: 10px;
+          width: auto; /* Change from 100% to auto if you want buttons to size based on content */
+          display: block; /* Makes each button take its own line */
+          margin: 10px auto; /* Adds margin to the top and bottom, and centers the button */
+        }
+        
+        .button-31:hover,
+        .button-31:focus {
+          opacity: 0.75;
+        }
+        
+    </style>
+</head>
+<body>
+
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            <p>Thank you<span id="customerName"></span>! We have received your information, and our team will contact you soon.</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="form-container">
+<form id="customerForm" method="post" action="{% url 'add_customer' %}">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ssn">SSN:</label>
+        <input type="text" id="ssn" name="ssn">
+    </div>
+
+    <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name">
+    </div>
+
+    <div class="form-group">
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name">
+    </div>
+
+    <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob">
+    </div>
+
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="3" max="99" required>
+    </div>
+
+    <div class="form-group">
+        <label for="heredity">Heredity:</label>
+        <select id="heredity" name="heredity" required>
+            <option value="">Select Option</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="income">Income:</label>
+        <input type="number" id="income" name="income" min="0" required>        
+    </div>
+
+    <div class="form-group">
+        <label for="unhealthy_eating">Unhealthy Eating:</label>
+        <select id="unhealthy_eating" name="unhealthy_eating" required>
+            <option value="">Select Option</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="smoking_drinking">Smoking and Drinking:</label>
+        <select id="smoking_drinking" name="smoking_drinking" required>
+            <option value="">Select Option</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="chronic_disease">Chronic Disease (type none if no such):</label>
+        <input type="text" id="chronic_disease" name="chronic_disease">
+    </div>
+
+    <div class="form-group">
+        <label for="city">City:</label>
+        <select id="city" name="city" required>
+            <option value="">Select City</option>
+            <option value="Melbourne">Melbourne</option>
+            <option value="San Jose">San Jose</option>
+            <option value="Grand Rapids">Grand Rapids</option>
+            <option value="Aiken">Aiken</option>
+            <option value="Anaheim">Anaheim</option>
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="Nashville">Nashville</option>
+            <option value="Tacoma">Tacoma</option>
+            <option value="Saint Louis">Saint Louis</option>
+            <option value="Green Bay">Green Bay</option>
+            <!-- Add other cities from your dataset here -->
+        </select>
+    </div>
+
+    <button class="button-31" role="button" id="calculateQuote">Calculate Quote</button>
+    <button class="button-31" role="button" type="submit">Save Customer Information</button>
+    <div id="quoteResult"></div>
+</form>
+</div>
+
+<script>
+    function validateForm() {
+        var requiredFields = ['gender', 'city', 'chronic_disease', 'age', 'heredity', 'income', 'smoking_drinking', 'unhealthy_eating'];
+        for (var i = 0; i < requiredFields.length; i++) {
+            var field = document.getElementById(requiredFields[i]);
+            if (field && field.value === '') {
+                return `Missing required field: ${field.name}`;
+            }
+        }
+        return null;
+    }
+
+    document.getElementById('calculateQuote').addEventListener('click', function(event){
+        event.preventDefault();
+        var errorMessage = validateForm();
+        if (errorMessage) {
+            document.getElementById('quoteResult').innerHTML = `<span style="color: red;">Error: ${errorMessage}</span>`;
+            return;
+        }
+
+        var form = document.getElementById('customerForm');
+        var formData = new FormData(form);
+        fetch("{% url 'calculate_quote' %}", {
+            method: 'POST',
+            body: formData,
+            headers: {'X-Requested-With': 'XMLHttpRequest'},
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => {throw err;});
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                document.getElementById('quoteResult').innerHTML = `<span style="color: red;">Error: ${data.error}</span>`;
+            } else {
+                document.getElementById('quoteResult').innerText = data.quote;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('quoteResult').innerHTML = `<span style="color: red;">${error.message}</span>`;
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
